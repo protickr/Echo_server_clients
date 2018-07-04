@@ -9,12 +9,12 @@ int main(int argc, char *argv[]){
 
     struct WSAData wsa;
     char send_buff[256]= "Initialize";
-    char clnt_msg[238] = {'0'};
-    char clnt_name[10] = {'0'};
-    char rcv_buff[1024] = {'0'};
-    char server_ip[16] = {'0'};
+    char clnt_msg[238] = {'\0'};
+    char clnt_name[10] = {'\0'};
+    char rcv_buff[1024] = {'\0'};
+    char server_ip[16] = {'\0'};
 
-    sprintf(server_ip, argv[1]);
+    sprintf(server_ip,"%s", argv[1]);
     sprintf(clnt_name,"%s", argv[2]);
 
     int clnt_socket;
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
                     memset(rcv_buff, 0, sizeof(char)*sizeof(rcv_buff));
                     memset(clnt_msg, 0, sizeof(char)*sizeof(clnt_msg));
 
-                    while(!(scanf("%237[^\n]s", clnt_msg)))
+                    while((scanf("%237[^\n]s", clnt_msg)) <= 0)
                         fflush(stdin);
                     
                     sprintf(send_buff,"%s: %s", clnt_name, clnt_msg);
